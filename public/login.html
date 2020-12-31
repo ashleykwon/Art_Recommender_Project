@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no,
+    initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <title> Artrecs </title>
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+    <!--Fonts-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@700&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:ital,wght@0,700;1,300&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Acme&display=swap" rel="stylesheet">
+
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-analytics.js"></script>
+</head>
+
+<body>
+<script src="index.js"></script>
+<script src = "firebase.js"></script> 
+<div class="page_container">
+    <!--HEADER-->
+    <header>
+        <div class="header_container">
+            <!--Website name-->
+            <h2 class="logo" id="logo"><span>ART</span>RECS</h2>
+
+            <!--Navegation menu-->
+            <nav>
+                    <a href="home_unregistered_user.html" id="home_button">Home</a>
+                    <a href="login.html" class=active id="login_button_in_header">Log in</a>
+                    <a href="register.html" id="register_button">Register</a>
+            </nav>
+        </div>
+    </header>
+
+
+    <!-- <div id="logout_div">
+      <button onclick="logout()">Logout</button>
+    </div> -->
+
+
+    <!--MAIN-->
+    <div class="main">
+        <div class="main_container">
+            <div class="login_page">
+                <!--Login part-->
+                <h4><span>L</span>og <span>I</span>n</h4>
+                <div class="login-form">
+                    <input type="email" placeholder="E-mail" id="email_field" />
+                    <br><input type="password" placeholder="Password" id="password_field" />
+                    <br><button type="submit" id="login_button" onclick="login()">Login</button>
+                    <br><p class="message">Not registered? <a href="register.html">Create an account</a></p>
+                </div>
+        </div>
+
+            <!--Quote-->
+            <div class="quote_container">
+                <div class="login_quote" id="login_quote">
+                    <blockquote>
+                    <span>"T</span>he very essence of the
+                    creative is its novelty,
+                    and hence we have
+                    no standard by which
+                    to judge it.<span>"</span>
+                    <cite> <br>-Carl Rogers</cite>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <!--FOOTER-->
+     <footer>
+        <div class=footer_container>
+            <div class="footer_after_line">
+                <p class="social_connect">WRITE <span>to</span> US:</p>
+                <p class="artrecs_em">📧artrec2020@gmail.com</p>
+            </div>
+        </div>
+    </footer>
+</div>
+        
+
+
+</body>
+</html>

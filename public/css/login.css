@@ -1,0 +1,276 @@
+﻿*
+{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+body
+{
+    background:url(../img/login_background.png) no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.page_container
+{
+    margin: 0 auto;
+    position: relative;
+    min-height: 100vh;
+    min-width: 32rem;    
+}
+
+/*HEADER*/
+header{
+    height: 145px;
+    font-family: 'Montserrat', sans-serif;
+    padding: 20px 0;
+    background: #fcf2ecd0;
+    border-bottom:#d66c7d 0.5em double;
+    margin-bottom: 30px;
+}
+
+.header_container{
+    width: 90%;
+    margin: auto;
+}
+
+header .header_container
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.logo
+{   
+    color:#38c3d3;
+    font-size: 65px;
+    font-weight: normal;
+}
+
+.logo span
+{
+    color: #e44c65;
+}
+
+header nav
+{
+    height: 100%;  
+}
+
+header nav a{
+    color:#bd3f54;
+    margin-right: 20px;
+    font-size: 20px;
+}
+
+header nav a:hover,
+header nav a.active
+{
+    color:#38c3d3;
+    
+    border-bottom: #38c3d3 0.25em double;
+    border-bottom-right-radius: 50%;
+
+    font-size: 23px;
+    font-weight: bold;
+}
+
+/*FOOTER*/
+footer 
+{
+    width: 100%;
+    bottom: 0;  
+    background: #ffffff;
+    text-align: center;
+    position: absolute;
+}
+
+.footer_container
+{
+    width: 90%;
+    margin: 0 auto;
+}
+
+.footer_container::before {
+    content: "";
+    width: calc(100% - 20px);
+    position: absolute;
+    bottom: 50%;
+    border-bottom: 3px solid;
+    left: 10px;
+}
+
+.footer_after_line
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: relative;
+}
+
+footer .social_connect, .artrecs_em
+{
+    display: inline-block;
+    background: #ffffff;
+    padding: 0 1rem;
+}
+
+.social_connect
+{
+    font-size: 3rem;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-style: italic;
+}
+
+.social_connect span
+{
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+footer .artrecs_em
+{
+    color:#7e2d3a;
+}
+
+ /*Login Main*/
+
+.main
+{
+    padding-top: 4rem;
+    padding-bottom: 4.5rem;
+}
+
+.main_container{
+    width: 90%;
+    margin: auto;
+    min-width: 30em;
+}
+
+.main .main_container
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+/*Quote*/
+.quote blockquote{
+    text-align: center;
+    font-size: 50px;
+    color:#bd3f54;
+}
+
+.quote_container 
+{
+    padding: 2rem 0;
+    width: 50%;
+    text-align: center;
+    border-bottom: #aa570a dotted 1rem;
+    border-left: #aa570a double 1rem;
+    border-top: #aa570a double 1rem;
+}
+
+.quote_container blockquote
+{
+    font-family: 'Dancing Script', cursive;
+    font-size: 40px;
+    color:#805731;
+    font-weight: normal;
+    background-color: antiquewhite;
+}
+
+.quote_container blockquote {
+    margin: 0 5%;
+}
+
+.quote_container blockquote span
+{
+    font-size: 48px;
+    font-weight: bold;
+    font-family: 'Sansita Swashed', cursive;
+}
+
+.quote_container blockquote cite
+{     
+    width: 100%;
+    font-size: 25px;
+    font-family: 'Patrick Hand', cursive;
+    text-transform: uppercase;
+}
+
+/*Login Form Part*/
+.login_page {
+    width: 40%;
+    color: black;
+    text-align: center;
+}
+.login_page h4{
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+    font-size: 60px;
+    font-family: 'Acme', sans-serif;
+    color:#bd3f54;
+}
+
+.login_page h4 span
+{
+    font-size: 90px;
+    font-weight: normal; 
+}
+
+.login_page  input{
+    width: 90%;
+    font-size: 1.4em;
+    border-radius: 50px;
+    margin: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    justify-content: space-between;
+    padding-left: 1rem;
+    padding-right: 0.5rem;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+}
+.login_page button
+{
+    font-size:1.2rem; 
+    color: #ffffff;
+    min-width: 7.5rem; 
+    width: 40%;
+    min-height: 40px;
+    background-color: #28a8b5;
+    font-family: 'Montserrat', sans-serif;
+    border-radius: 50px;
+    justify-content: space-between;
+}
+.login_page p{
+    margin-top: 0.5rem;
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.login_page input:focus
+{
+	border:3px solid #28a8b5;
+}
+
+.login_page button[type="submit"]:hover 
+{
+    cursor: pointer;
+	background: #175b63;
+	color: #fff;
+}
+
+.login_page .message a:hover
+{
+    text-decoration: underline;
+}

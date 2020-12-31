@@ -1,0 +1,20 @@
+{
+  "rules": {
+    "usernames": {
+      "$username": {
+        ".read": false,
+        ".write": "!root.child('usernames').child($username).exists()"
+      }
+    },
+    "users": {
+      "$user_id": {
+        ".read": "auth.uid === $user_id",
+        ".write": "auth.uid === $user_id"
+      }
+    },
+    "artworks": {
+      ".read": true,
+      ".write": true
+    }
+  }
+}

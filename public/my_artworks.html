@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, user-scalable=no,
+    initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+	<title> Artrecs </title>
+	<link rel="stylesheet" type="text/css" href="css/Recommendations_registered_user.css">
+	<!--Fonts-->
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+	<link
+		href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@100;300&family=Montserrat:ital,wght@0,100;1,500&display=swap"
+		rel="stylesheet">
+
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:ital,wght@0,700;1,300&display=swap"
+		rel="stylesheet">
+
+	<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-storage.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-analytics.js"></script>
+</head>
+
+<body>
+	<script src="firebase.js"></script>
+	<script src="index.js"></script>
+
+	<div class="page_container">
+		<!--HEADER-->
+		<header>
+			<div class="header_container">
+				<!--Website name-->
+				<h2 class="logo" id="logo"><span>ART</span>RECS</h2>
+				<!--Navegation menu-->
+				<nav>
+					<a href="home_registered_user.html" id="home_button">Home</a>
+					<a href="my_artworks.html" class=active id="my_artworks_button">My Artworks</a>
+					<a href="my_library.html" id="my_library_button">My Library</a>
+					<a href="home_unregistered_user.html" id="log_out_button">Log Out</a>
+				</nav>
+			</div>
+		</header>
+
+		<!--Main-->
+		<div class="main">
+			<div class="main_container">
+				<h3>The artworks I uploaded</h3>
+				<div class="pictures">
+					<div class="pictures_container" id="pictures_container">
+
+						<!--where pictures are loaded-->
+
+					</div>
+				</div>
+			</div>
+			<!--FOOTER-->
+			<footer>
+				<div class=footer_container>
+					<div class="footer_after_line">
+						<p class="social_connect">WRITE <span>to</span> US:</p>
+						<p class="artrecs_em">📧artrec2020@gmail.com</p>
+					</div>
+				</div>
+			</footer>
+		</div>
+
+		<script id="MainScript">
+			var uploaded = [];
+			firebase.auth().onAuthStateChanged(function (user) {
+				if (user) {
+					console.log(user)
+					var links = [];
+					var pictures_container = document.getElementById("pictures_container");
+					console.log(pictures_container)
+
+					var userID = user.uid;
+					
+					var uploadedArtworks = firebase.database().ref("users/").child(userID).child("myArtworks");
+					
+					uploadedArtworks.on("child_added", function(snapshot){	
+						//console.log(typeof snapshot.val())
+						artwork = firebase.database().ref("artworks/").child(snapshot.val().artworkID)
+
+						// artworkIDs.push(snapshot.val().artworkID)
+						// console.log(artworkIDs)
+						artwork.on("value", function(snapshot){
+							// console.log('artist name ' + snapshot.val().artistName)
+							// console.log('artwork title ' + snapshot.val().artworkTitle)
+							// console.log('creation year ' + snapshot.val().creationYear)
+							// console.log('desription ' + snapshot.val().description)
+							// console.log('link '+ snapshot.val().fileLink)
+							if (snapshot.val().fileLink != "yyy"){
+								pictures_container.innerHTML += `
+								<div style="float:left" class="hover_effect_box hover_effect_1">
+										<div class="content_bg">
+											<img src="` + snapshot.val().fileLink + `"/>
+										</div>
+										<div class="caption">
+											<div class="caption_title">` + snapshot.val().artworkTitle + `</div>
+											<div class="caption_desc">
+												Artist:`+   snapshot.val().artistName + `<br>
+												Year:` +  snapshot.val().creationYear + `<br>
+												Description:` +  snapshot.val().description + `
+											</div>
+										</div>
+								</div>`;
+							}
+								
+						})
+					})				
+			
+				} else {
+					console.log('user not logged in')
+				}
+			});
+		</script>
+
+</body>
+
+</html>

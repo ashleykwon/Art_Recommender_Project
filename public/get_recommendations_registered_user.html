@@ -1,0 +1,468 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, user-scalable=no,
+        initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <title>Get Recommendations</title>
+    <link rel="stylesheet" type="text/css" href="css/get_recommendations.css">
+    <!--Fonts-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@100;300&family=Montserrat:ital,wght@0,100;1,500&display=swap"
+        rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@300&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@700&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:ital,wght@0,700;1,300&display=swap"
+        rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Acme&display=swap" rel="stylesheet">
+
+    <meta charset="utf-8" />
+
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-analytics.js"></script>
+</head>
+
+<body>
+    <script src="firebase.js"></script>
+    <script src="index.js"></script>
+    <div class="page_container">
+        <!--HEADER-->
+        <header>
+            <div class="header_container">
+                <!--Website name-->
+                <h2 class="logo" id="logo"><span>ART</span>RECS</h2>
+                <!--Navegation menu-->
+                <nav>
+                    <!--This header is for registered users-->
+                    <a href="home_registered_user.html" id="home_button">Home</a>
+                    <a href="my_artworks.html" id="my_artworks_button">My Artworks</a>
+                    <a href="my_library.html" id="my_library_button">My Library</a>
+                    <a href="home_unregistered_user.html" id="log_out_button">Log Out</a>
+
+                    <!--This other header should show up if the user is logged in
+                        
+                        <a href="home_registered_user.html" id="home_button">Home</a>
+                        <a href="#" id="my_artworks_button">My Artworks</a>
+                        <a href="#" id="my_library_button">My Library</a>
+                        <a href="#" id="log_out_button">Log Out</a>
+                        -->
+                </nav>
+            </div>
+        </header>
+
+        <!--MAIN-->
+        <div class="main">
+            <div class="main_container">
+                <div class="questionnaire part">
+                    <div class="titles">How would you characterize a good artwork?</div>
+                    <div class="questionnaire_container">
+                        <div class="question_container">
+                            <div class="question">How colorful should a good artwork be?</div>
+                            <div class="slide_container">
+                                <input type="range" min="1" max="100" value="50" class="questionnaire_slider"
+                                    id="slider1">
+                                <p class="slider_value"><span id="demo1"></span></p>
+                            </div>
+                            <script>
+                                var slider1 = document.getElementById("slider1");
+                                var output1 = document.getElementById("demo1");
+                                output1.innerHTML = slider1.value;
+
+                                slider1.oninput = function () {
+                                    output1.innerHTML = this.value;
+                                }
+                            </script>
+                        </div>
+                        <div class="question_container">
+                            <div class="question">Should a good artwork be more abstract(1) or realistic (100)?</div>
+                            <div class="slide_container">
+                                <input type="range" min="1" max="100" value="50" class="questionnaire_slider"
+                                    id="slider2">
+                                <p class="slider_value"><span id="demo2"></span></p>
+                            </div>
+                            <script>
+                                var slider2 = document.getElementById("slider2");
+                                var output2 = document.getElementById("demo2");
+                                output2.innerHTML = slider2.value;
+
+                                slider2.oninput = function () {
+                                    output2.innerHTML = this.value;
+                                }
+                            </script>
+                        </div>
+                        <div class="question_container">
+                            <div class="question">Should a good artwork be more minimalistic(1) or extravagant (100)?
+                            </div>
+                            <div class="slide_container">
+                                <input type="range" min="1" max="100" value="50" class="questionnaire_slider"
+                                    id="slider3">
+                                <p class="slider_value"><span id="demo3"></span></p>
+                            </div>
+                            <script>
+                                var slider3 = document.getElementById("slider3");
+                                var output3 = document.getElementById("demo3");
+                                output3.innerHTML = slider3.value;
+
+                                slider3.oninput = function () {
+                                    output3.innerHTML = this.value;
+                                }
+                            </script>
+                        </div>
+                        <div class="question_container">
+                            <div class="question">How much time should an artist spend to create a good artwork with 1
+                                being less than a month and 100 being more than 5 years?</div>
+                            <div class="slide_container">
+                                <input type="range" min="1" max="100" value="50" class="questionnaire_slider"
+                                    id="slider4">
+                                <p class="slider_value"><span id="demo4"></span></p>
+                            </div>
+                            <script>
+                                var slider4 = document.getElementById("slider4");
+                                var output4 = document.getElementById("demo4");
+                                output4.innerHTML = slider4.value;
+
+                                slider4.oninput = function () {
+                                    output4.innerHTML = this.value;
+                                }
+                            </script>
+                        </div>
+                        <div class="question_container">
+                            <div class="question">How much should a good artwork be related to the artist's personal
+                                experiences?</div>
+                            <div class="slide_container">
+                                <input type="range" min="1" max="100" value="50" class="questionnaire_slider"
+                                    id="slider5">
+                                <p class="slider_value"><span id="demo5"></span></p>
+                            </div>
+                            <script>
+                                var slider5 = document.getElementById("slider5");
+                                var output5 = document.getElementById("demo5");
+                                output5.innerHTML = slider5.value;
+
+                                slider5.oninput = function () {
+                                    output5.innerHTML = this.value;
+                                }
+                            </script>
+                        </div>
+                        <div class="question_container">
+                            <div class="question">How much should a good artwork be inspired by older artworks,
+                                histories, and mythologies?</div>
+                            <div class="slide_container">
+                                <input type="range" min="1" max="100" value="50" class="questionnaire_slider"
+                                    id="slider6">
+                                <p class="slider_value"><span id="demo6"></span></p>
+                            </div>
+                            <script>
+                                var slider6 = document.getElementById("slider6");
+                                var output6 = document.getElementById("demo6");
+                                output6.innerHTML = slider6.value;
+
+                                slider6.oninput = function () {
+                                    output6.innerHTML = this.value;
+                                }
+                            </script>
+                        </div>
+                        <div class="question_container">
+                            <div class="question">How much should a good artwork be related to social issues (e.g.
+                                migration, gender, environment . . . etc.)?</div>
+                            <div class="slide_container">
+                                <input type="range" min="1" max="100" value="50" class="questionnaire_slider"
+                                    id="slider7">
+                                <p class="slider_value"><span id="demo7"></span></p>
+                            </div>
+                            <script>
+                                var slider7 = document.getElementById("slider7");
+                                var output7 = document.getElementById("demo7");
+                                output7.innerHTML = slider7.value;
+
+                                slider7.oninput = function () {
+                                    output7.innerHTML = this.value;
+                                }
+                            </script>
+                        </div>
+                        <div class="question_container">
+                            <div class="question">How thought-provoking should a good artwork be?</div>
+                            <div class="slide_container">
+                                <input type="range" min="1" max="100" value="50" class="questionnaire_slider"
+                                    id="slider8">
+                                <p class="slider_value"><span id="demo8"></span></p>
+                            </div>
+                            <script>
+                                var slider8 = document.getElementById("slider8");
+                                var output8 = document.getElementById("demo8");
+                                output8.innerHTML = slider8.value;
+
+                                slider8.oninput = function () {
+                                    output8.innerHTML = this.value;
+                                }
+                            </script>
+                        </div>
+                        <div class="question_container">
+                            <div class="question">How much room for interpretation should a good artwork leave to
+                                viewers?</div>
+                            <div class="slide_container">
+                                <input type="range" min="1" max="100" value="50" class="questionnaire_slider"
+                                    id="slider9">
+                                <p class="slider_value"><span id="demo9"></span></p>
+                            </div>
+                            <script>
+                                var slider9 = document.getElementById("slider9");
+                                var output9 = document.getElementById("demo9");
+                                output9.innerHTML = slider9.value;
+
+                                slider9.oninput = function () {
+                                    output9.innerHTML = this.value;
+                                }
+                            </script>
+                        </div>
+                        <div class="question_container">
+                            <div class="question">How likely is it for people to find a good artwork in a museum of a
+                                gallery?</div>
+                            <div class="slide_container">
+                                <input type="range" min="1" max="100" value="50" class="questionnaire_slider"
+                                    id="slider10">
+                                <p class="slider_value"><span id="demo10"></span></p>
+                            </div>
+                            <script>
+                                var slider10 = document.getElementById("slider10");
+                                var output10 = document.getElementById("demo10");
+                                output10.innerHTML = slider10.value;
+
+                                slider10.oninput = function () {
+                                    output10.innerHTML = this.value;
+                                }
+                            </script>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="check_categories part">
+                    <div class="titles">What categories do you want to get recommendations in?</div>
+                    <div class="categories">
+                        <div class="categories_container">
+                            <div class="category">
+                                <span>Architecture:</span>
+                                <input class="checkbox" type="checkbox" id="architecture">
+                            </div>
+                            <div class="category">
+                                <span>Calligraphy:</span>
+                                <input class="checkbox" type="checkbox" id="calligraphy">
+                            </div>
+                            <div class="category">
+                                <span>Painting:</span>
+                                <input class="checkbox" type="checkbox" id="painting">
+                            </div>
+                            <div class="category">
+                                <span>Photography:</span>
+                                <input class="checkbox" type="checkbox" id="photography">
+                            </div>
+                            <div class="category">
+                                <span>Pottery:</span>
+                                <input class="checkbox" type="checkbox" id="pottery">
+                            </div>
+                            <div class="category">
+                                <span>Sculpture:</span>
+                                <input class="checkbox" type="checkbox" id="sculpture">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="number_of_recomendations part">
+                    <div class="titles">How many recommendations do you want to get?</div>
+                    <select class="number" id='num_recs'>
+                        <option value=1>1</option>
+                        <option value=2>2</option>
+                        <option value=3>3</option>
+                        <option value=4>4</option>
+                        <option value=5>5</option>
+                        <option value=6>6</option>
+                        <option value=7>7</option>
+                        <option value=8>8</option>
+                        <option value=9>9</option>
+                        <option value=10>10</option>
+                    </select>
+                </div>
+                <div class="button_container">
+                    <button class="button" id="submit">Submit</button>
+                </div>
+            </div>
+        </div>
+
+        <!--FOOTER-->
+        <footer>
+            <div class=footer_container>
+                <div class="footer_after_line">
+                    <p class="social_connect">WRITE <span>to</span> US:</p>
+                    <p class="artrecs_em">📧artrec2020@gmail.com</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script id="MainScript">
+        var checkboxChoice = [];
+        var sliderChoice = [];
+        var num_recs = 0;
+        function GetInputData() {
+            var checked1 = document.getElementById("architecture").checked;
+            var checked2 = document.getElementById("calligraphy").checked;
+            var checked3 = document.getElementById("painting").checked;
+            var checked4 = document.getElementById("photography").checked;
+            var checked5 = document.getElementById("pottery").checked;
+            var checked6 = document.getElementById("sculpture").checked;
+
+            var choices = [checked1, checked2, checked3, checked4, checked5, checked6]
+            var categories = ['architecture', 'calligraphy', 'painting', 'photography', 'pottery', 'sculpture']
+            var nbOfChecks = 0;
+            for (i = 0; i < choices.length; i++) {
+                if (choices[i]) {
+                    checkboxChoice.push(categories[i]);
+                }
+            }
+
+            var sliderValue1 = document.getElementById("slider1").value;
+            var sliderValue2 = document.getElementById("slider2").value;
+            var sliderValue3 = document.getElementById("slider3").value;
+            var sliderValue4 = document.getElementById("slider4").value;
+            var sliderValue5 = document.getElementById("slider5").value;
+            var sliderValue6 = document.getElementById("slider6").value;
+            var sliderValue7 = document.getElementById("slider7").value;
+            var sliderValue8 = document.getElementById("slider8").value;
+            var sliderValue9 = document.getElementById("slider9").value;
+            var sliderValue10 = document.getElementById("slider10").value;
+            sliderChoice = [sliderValue1, sliderValue2, sliderValue3, sliderValue4, sliderValue5, sliderValue6, sliderValue7, sliderValue8, sliderValue9, sliderValue10];
+
+            num_recs = document.getElementById('num_recs').value;
+        }
+
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                var candidates = [];
+                var selected_round1 = [];
+                var selected_round2 = [];
+                var ref = firebase.database().ref('artworks');
+                ref.on("child_added", function (snapshot) {
+                    artwork = snapshot.val();
+                    candidates.push({
+                        key: artwork.artworkID,
+                        value: [artwork.categoryVec, artwork.characVec]
+                    });
+                })
+
+                var recommended = [];
+
+                //Filters entries collected from the artwork table based on their category vector values
+                document.getElementById("submit").onclick = function () {
+                    GetInputData();
+                    if (checkboxChoice.length == 0) {
+                        alert('Please choose at least one category!')
+                    }
+                    for (i = 0; i < candidates.length; i++) {
+                        var categVec = candidates[i].value[0];
+                        const intersection = categVec.filter(element => checkboxChoice.includes(element));
+                        //console.log(intersection);
+                        if (intersection.length > 0) {
+                            selected_round1.push({
+                                key: candidates[i].key,
+                                value: [candidates[i].value[0], candidates[i].value[1]]
+                            });
+                        }
+                    }
+                    //console.log(selected_round1);
+
+                    //Filters remaining entries collected from the artwork table based on 
+                    //the squared distance between their characteristic vector values and the slider values
+                    if (selected_round1.length <= num_recs) {
+                        for (i = 0; i < selected_round1.length; i++) {
+                            recommended.push(selected_round1[i].key)
+                        }
+                    }
+                    else {
+                        for (i = 0; i < selected_round1.length; i++) {
+                            var squared_dist = 0;
+                            for (j = 0; j < selected_round1[i].value[1].length; j++) {
+                                squared_dist += (selected_round1[i].value[1][j] - sliderChoice[j]) ** 2
+                            }
+                            selected_round2.push({
+                                key: selected_round1[i].key,
+                                value: squared_dist
+                            })
+                        }
+
+                        selected_round2.sort(function (first, second) {
+                            return first.value - second.value;
+                        });
+                        for (n = 0; n < num_recs; n++) {
+                            recommended.push(selected_round2[n].key)
+                        }
+
+                    }
+
+                    //console.log(recommended);
+
+                    //prepares outputs for the recommenndations page
+                    //var userID = "";
+                    //console.log(userEmail)
+
+                    var ref = firebase.database().ref('users');
+                    var userID = user.uid;
+                    console.log(userID);
+
+                    //console.log(userID);
+                    var prevRecs = firebase.database().ref("users/").child(userID).child("pastRecs");
+                    prevRecs.on('value', (snapshot) => {
+                        console.log(snapshot.val())
+                        console.log(snapshot.val()[0] === "bbb")
+
+                        if (snapshot.val()[0] === "bbb"){
+                            firebase.database().ref("users/" + userID).update({
+                                recList: recommended,
+                                pastRecs: recommended
+                            })
+                        }else{
+                            pastRecs_updated = snapshot.val().concat(recommended).filter(onlyUniqueElements)
+                            firebase.database().ref("users/" + userID).update({
+                                recList: recommended,
+                                pastRecs: pastRecs_updated
+                            })
+                        }
+                        location.href = "Recommendations_registered_user.html"
+                    }) 
+
+                };
+
+            } else {
+                console.log('user not logged in')
+                // No user is signed in.
+                // ...
+
+            }
+
+        });
+
+        // function to retrieve the characteristic vector
+
+    </script>
+
+    <script>
+        function onlyUniqueElements(value, index, self) {
+            return self.indexOf(value) === index;
+        }
+    </script>
+
+</body>
+
+</html>

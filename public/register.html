@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no,
+          initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <title> Artrecs </title>
+    <link rel="stylesheet" type="text/css" href="css/register.css">
+
+    <!--Fonts-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@300&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@700&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:ital,wght@0,700;1,300&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Acme&display=swap" rel="stylesheet">
+
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-analytics.js"></script>
+
+</head>
+
+<body>
+<script src = "firebase.js"></script>
+<div class="page_container">
+    <!--HEADER-->
+    <header>
+        <div class="header_container">
+            <!--Website name-->
+            <h2 class="logo" id="logo"><span>ART</span>RECS</h2>
+
+            <!--Navegation menu-->
+            <nav>
+                    <a href="home_unregistered_user.html" id="home_button">Home</a>
+                    <a href="login.html" id="login_button">Log in</a>
+                    <a href="register.html" class=active id="register_button_in_header">Register</a>
+            </nav>
+        </div>
+    </header>
+
+    <!--MAIN-->
+    <div class="main">
+        <div class="main_container">
+            <!--Quote-->
+            <div class="quote_container">
+                <div class="register_quote" id="register_quote">
+                    <blockquote>
+                    <span>"A</span>rt begins with resistance
+                    - at the point where
+                    resistance is overcome.
+                    No human masterpiece
+                    has ever been created
+                    without great labor.<span>"</span>
+                    <cite> <br>-Andre Gide</cite>
+                    </blockquote>
+                </div>
+            </div>
+
+            <div class="register_page">
+                <!--Register part-->
+                <h4>Register</h4>
+                <div class="register-form">
+                <!--Form-->
+
+                    <input type="email" placeholder="Email" id="email_field" />
+                    <div class="user_id_container">
+                        <input type="text" class="user_id" placeholder="ID" id="user_id"/>
+                        
+                    </div>
+                    <input type="password" id="password_field" placeholder="Password" />
+                    <input type="password" id="passwordConfirm_field" placeholder="Confirm Password" />
+                    <!--Continue Button-->
+                    <button type="submit" id="register_button" onclick="emailSignIn()">Register</button>
+                    <p class="message">Already registered? <a href="login.html">Log In</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--FOOTER-->
+    <footer>
+        <div class=footer_container>
+            <div class="footer_after_line">
+                <p class="social_connect">WRITE <span>to</span> US:</p>
+                <p class="artrecs_em">📧artrec2020@gmail.com</p>
+            </div>
+        </div>
+    </footer>
+</div>
+
+
+<script src="index.js"></script>
+
+</body>
+</html>

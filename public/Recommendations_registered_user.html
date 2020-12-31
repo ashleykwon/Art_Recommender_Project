@@ -1,0 +1,191 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, user-scalable=no,
+    initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+	<title> Artrecs </title>
+	<link rel="stylesheet" type="text/css" href="css/Recommendations_registered_user.css">
+	<!--Fonts-->
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+	<link
+		href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@100;300&family=Montserrat:ital,wght@0,100;1,500&display=swap"
+		rel="stylesheet">
+
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:ital,wght@0,700;1,300&display=swap"
+		rel="stylesheet">
+
+	<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-storage.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-analytics.js"></script>
+</head>
+
+<body>
+	<script src="firebase.js"></script>
+	<script src="index.js"></script>
+
+	<div class="page_container">
+		<!--HEADER-->
+		<header>
+			<div class="header_container">
+				<!--Website name-->
+				<h2 class="logo" id="logo"><span>ART</span>RECS</h2>
+				<!--Navegation menu-->
+				<nav>
+					<a href="home_registered_user.html" id="home_button">Home</a>
+					<a href="my_artworks.html" id="my_artworks_button">My Artworks</a>
+					<a href="my_library.html" id="my_library_button">My Library</a>
+					<a href="home_unregistered_user.html" id="log_out_button">Log Out</a>
+				</nav>
+			</div>
+		</header>
+
+		<div class="main">
+			<div class="main_container" id='main_container'>
+				<h3>Recommended Artworks</h3>
+				<div class="pictures" id="pictures">
+
+					<div class="pictures_container" id = "pictures_container">
+						<!--This is where all recommended pixtures appear-->
+					</div>
+
+				</div>
+			</div>
+			<!--FOOTER-->
+			<footer>
+				<div class=footer_container>
+					<div class="footer_after_line">
+						<p class="social_connect">WRITE <span>to</span> US:</p>
+						<p class="artrecs_em">📧artrec2020@gmail.com</p>
+					</div>
+				</div>
+			</footer>
+		</div>
+
+		<script>
+			var uploaded = [];
+			firebase.auth().onAuthStateChanged(function (user) {
+				if (user) {
+					//console.log(user)
+					var links = [];
+					var pictures_container = document.getElementById("pictures_container");
+
+					var userID = user.uid;
+					console.log(userID)
+
+					var recommendedArtworks = firebase.database().ref("users/").child(userID).child("recList");
+
+					recommendedArtworks.on("child_added", function (snapshot) {
+						
+						artwork = firebase.database().ref("artworks/").child(snapshot.val())
+			
+						artwork.on("value", function (snapshot) {
+							// console.log(snapshot.val())
+							// console.log('artist name ' + snapshot.val().artistName)
+							// console.log('artwork title ' + snapshot.val().artworkTitle)
+							// console.log('creation year ' + snapshot.val().creationYear)
+							// console.log('desription ' + snapshot.val().description)
+							// console.log('link ' + snapshot.val().fileLink)
+						
+							pictures_container.innerHTML += `
+											<div style="float:left" class="hover_effect_box hover_effect_1">
+													<div class="content_bg">
+														<img src="` + snapshot.val().fileLink + `"/>
+													</div>
+													<div class="caption">
+														<div class="caption_title">` + snapshot.val().artworkTitle + `</div>
+														<div class="caption_desc">
+															Artist:`+ snapshot.val().artistName + `<br>
+															Year:` + snapshot.val().creationYear + `<br>
+															Description:` + snapshot.val().description + `
+														</div>
+													</div>
+											</div>`;
+						})
+					})
+
+				} else {
+					console.log('user not logged in')
+				}
+			});
+			// firebase.auth().onAuthStateChanged(function (user) {
+			// if (user) {
+			// 	var userID = user.uid;
+			// 	var recommendations = firebase.database().ref('users/' + userID + '/recList')
+
+			// 	recommendations.on("value", function (snapshot) {
+			// 		console.log(snapshot.val())
+			// 	});
+			// 	window.alert(recommendations)
+
+			// 	var fileLinks = [];
+			// 	var fileTitles = [];
+			// 	var fileDescs = [];
+			// 	var fileCreationYears = [];
+			// 	var fileArtistNames = [];
+
+			// 	var pictures = document.getElementById("pictures");
+
+				// for (i = 0; i < recommendations.length; i++) {
+				// 	var fileLink = firebase.database().ref('artworks/' + recommendations[i] + '/fileLink');
+				// 	var fileTitle = firebase.database().ref('artworks/' + recommendations[i] + '/artworkTitle');
+				// 	var fileDesc = firebase.database().ref('artworks/' + recommendations[i] + '/description');
+				// 	var fileCreationYear = firebase.database().ref('artworks/' + recommendations[i] + '/creationYear');
+				// 	var fileArtistName = firebase.database().ref('artworks/' + recommendations[i] + '/artistName');
+
+				// 	fileLinks.push(link);
+				// 	fileTitles.push(fileTitle);
+				// 	fileDescs.push(fileDesc);
+				// 	fileCreationYears.push(fileCreationYear);
+				// 	fileArtistNames.push(fileArtistName);
+
+				// 	document.getElementById("image").value = fileLink;
+				// 	document.getElementById("caption_title").value = fileTitle;
+				// 	document.getElementById("caption_desc").value = fileDesc;
+				// 	document.getElementById("caption_year").value = fileCreationYear;
+				// 	document.getElementById("caption_artist").value = fileArtistName;
+
+				// 	document.getElementById("caption_artist").innerHTML = fileArtistName;	// WORK OR NOT????????
+
+
+				// 	pictures.innerHTML += `<div class="pictures_container">
+				// 			<div style="float:left" class="hover_effect_box hover_effect_1">
+				// 				<div class="content_bg">
+				// 					<img id = 'image' src= image/>
+				// 				<div class="caption">
+				// 					<div class="caption_title" id = 'caption_title'>NOT MONA LISA</div>
+				// 					<div class="caption_title" id = "caption_artist"></div>
+				// 					<div class="caption_desc" id = "caption_desc"></div>
+				// 					<div class="caption_desc" id = "caption_year"></div>
+				// 				</div>
+				// 			</div>
+				// 	</div>`;
+
+				// }
+
+		// 	} else {
+		// 		console.log('user not logged in')
+				
+		// 	}
+		// });
+			
+				
+				
+			
+
+		</script>
+
+		<!--Main-->
+
+
+
+
+</body>
+
+</html>
